@@ -8,8 +8,14 @@ import (
 
 // Config 全局配置结构体
 type Config struct {
-	MySQL  MySQLConfig  `mapstructure:"mysql"`
-	Logger LoggerConfig `mapstructure:"logger"`
+	MySQL    MySQLConfig    `mapstructure:"mysql"`
+	Logger   LoggerConfig   `mapstructure:"logger"`
+	Services ServicesConfig `mapstructure:"services"`
+}
+
+// ServicesConfig 下游微服务地址
+type ServicesConfig struct {
+	User string `mapstructure:"user"` // user 服务 gRPC 地址，如 localhost:9001
 }
 
 // LoggerConfig 日志配置

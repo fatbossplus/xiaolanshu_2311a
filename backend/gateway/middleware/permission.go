@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"backend/pkg/logger"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,8 @@ func PermissionMiddleware() gin.HandlerFunc {
 		// 【入站】检查当前用户是否有访问该路由的权限
 		userID := c.GetInt64("userID")
 		path := c.FullPath()
+
+		fmt.Println("userID:", userID, "path:", path)
 
 		if !hasPermission(userID, path) {
 			log.Warn("permission denied",
@@ -37,6 +40,9 @@ func PermissionMiddleware() gin.HandlerFunc {
 
 // hasPermission 权限校验，后续对接 casbin 或数据库权限表
 func hasPermission(userID int64, path string) bool {
-	// TODO: 接入 casbin
+	if userID == 0 {
+		return true
+	}
+	// TODO: 接入 userID 与 path 去 user_acess_permissions 表中查询是否有权限
 	return true
 }

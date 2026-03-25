@@ -6,17 +6,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func RegisterAuthRoutes(v1 *gin.RouterGroup) {
-
-	// 无需登录的认证接口
+func RegisterAuthRoutes(v1 *gin.RouterGroup, h *handler.Handler) {
 	auth := v1.Group("/auth")
 	{
 		auth.POST("/register")
-		auth.POST("/login", handler.Login)
+		auth.POST("/login", h.Login)
 		auth.POST("/refresh")
 	}
 
-	// 需要登录的认证接口
 	authRequired := v1.Group("/auth")
 	authRequired.Use(middleware.AuthMiddleware())
 	{

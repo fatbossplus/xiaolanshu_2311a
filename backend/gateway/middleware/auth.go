@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"backend/pkg/logger"
+	"backend/pkg/response"
 	"errors"
 	"net/http"
 	"strings"
@@ -28,7 +29,7 @@ func AuthMiddleware() gin.HandlerFunc {
 		token := strings.TrimPrefix(c.GetHeader("Authorization"), "Bearer ")
 		if token == "" {
 			log.Warn("auth failed: missing token")
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"msg": "未登录"})
+			response.Error(c, response.CodeUnauthorized)
 			return
 		}
 

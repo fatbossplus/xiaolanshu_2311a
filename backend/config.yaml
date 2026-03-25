@@ -15,3 +15,7 @@ mysql:
 logger:
   level: debug
   file: logs
+
+# 下游微服务地址
+services:
+  user: localhost:9001
