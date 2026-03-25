@@ -1,0 +1,6 @@
+{"level":"INFO","ts":"2026-03-25 11:35:15","caller":"gin@v1.12.0/context.go:192","msg":"permission passed","userID":0}
+{"level":"INFO","ts":"2026-03-25 11:35:15","caller":"gin@v1.12.0/context.go:192","msg":"trace start","traceID":"1774409715374795000","path":"/v1/auth/register"}
+{"level":"INFO","ts":"2026-03-25 11:35:15","caller":"gin@v1.12.0/context.go:192","msg":"trace end","traceID":"1774409715374795000","path":"/v1/auth/register","status":200,"latency":0.000076584}
+{"level":"INFO","ts":"2026-03-25 11:42:40","caller":"gin@v1.12.0/context.go:192","msg":"permission passed","userID":0}
+{"level":"INFO","ts":"2026-03-25 11:42:40","caller":"gin@v1.12.0/context.go:192","msg":"trace start","traceID":"1774410160213130000","path":"/v1/auth/register"}
+{"level":"INFO","ts":"2026-03-25 11:42:40","caller":"gin@v1.12.0/context.go:192","msg":"trace end","traceID":"1774410160213130000","path":"/v1/auth/register","status":200,"latency":0.000017708}

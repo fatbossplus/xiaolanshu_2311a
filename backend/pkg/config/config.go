@@ -14,9 +14,8 @@ type Config struct {
 
 // LoggerConfig 日志配置
 type LoggerConfig struct {
-	Level   string `mapstructure:"level"`   // debug/info/warn/error
-	File    string `mapstructure:"file"`    // 日志根目录，空则只输出到控制台
-	Service string `mapstructure:"service"` // 服务名，注入每条日志
+	Level string `mapstructure:"level"` // debug/info/warn/error
+	File  string `mapstructure:"file"`  // 日志根目录，空则只输出到控制台
 }
 
 // MySQLConfig MySQL数据库配置

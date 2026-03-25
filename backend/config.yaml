@@ -15,4 +15,3 @@ mysql:
 logger:
   level: debug
   file: logs
-  service: gateway
