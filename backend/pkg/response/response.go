@@ -50,26 +50,33 @@ func GetCodeMessage(code int) string {
 
 // Success 成功响应
 func Success(c *gin.Context, data interface{}) {
+	//traceID := getTraceID(c)
 	c.JSON(http.StatusOK, Response{
 		Code:    CodeSuccess,
 		Message: "success",
 		Data:    data,
+		//TraceID: traceID,
 	})
 }
 
 // SuccessWithMessage 成功响应(自定义消息)
 func SuccessWithMessage(c *gin.Context, message string, data interface{}) {
+	//traceID := getTraceID(c)
 	c.JSON(http.StatusOK, Response{
 		Code:    CodeSuccess,
 		Message: message,
 		Data:    data,
+		//TraceID: traceID,
 	})
 }
 
 // Error 错误响应
 func Error(c *gin.Context, code int) {
+	//traceID := getTraceID(c)
+	//httpStatus := getHTTPStatus(code)
 	c.JSON(400, Response{
 		Code:    code,
 		Message: GetCodeMessage(code),
+		//TraceID: traceID,
 	})
 }

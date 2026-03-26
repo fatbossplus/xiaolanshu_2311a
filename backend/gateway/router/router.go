@@ -1,24 +1,22 @@
 package router
 
 import (
-	"backend/gateway/internal/handler"
-	"backend/gateway/middleware"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
-func SetRouter(r *gin.Engine, h *handler.Handler) {
-	// 健康检查
+func GetRouter() *gin.Engine {
+	r := gin.Default()
 	r.GET("/health", func(c *gin.Context) {
-		c.String(200, "ok")
+		c.String(http.StatusOK, "Welcome health")
 	})
 
-	v1 := r.Group("/v1")
-	v1.Use(middleware.CORSMiddleware())       // 跨域
-	v1.Use(middleware.LoggerMiddleware())     // 日志
-	v1.Use(middleware.TraceMiddleware())      // 链路追踪
-	v1.Use(middleware.RateLimitMiddleware())  // 限流
-	v1.Use(middleware.PermissionMiddleware()) // 权限
+	v1 := r.Group("/v1") // 版本路由
 
-	RegisterAuthRoutes(v1, h)
-	RegisterUserRoutes(v1, h)
+	// 洋葱模型
+
+	RegisterAuthRouter(v1) // 认证路由
+	RegisterUserRouter(v1) // 用户路由
+	RegisterNoteRouter(v1) // 笔记路由
+	return r
 }

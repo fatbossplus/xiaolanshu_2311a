@@ -1,0 +1,21 @@
+# MySQL数据库配置
+mysql:
+  host: localhost
+  port: 3306
+  username: root
+  password: "123456"
+  database: xiaolanshu
+  charset: utf8mb4
+  max_idle_conns: 10
+  max_open_conns: 100
+  conn_max_lifetime: 3600  # 秒
+
+
+# 日志配置
+logger:
+  level: debug
+  file: logs
+
+# 下游微服务地址
+services:
+  user: localhost:9001

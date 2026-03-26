@@ -1,13 +1,10 @@
 package main
 
 import (
-	"backend/gateway/internal/client"
-	"backend/gateway/internal/handler"
-	"backend/gateway/router"
-	"backend/pkg/config"
-	"backend/pkg/logger"
+	"backend/pkg/validate"
 	"context"
-	"github.com/gin-gonic/gin"
+	"gateway/router"
+	"github.com/gin-gonic/gin/binding"
 	"log"
 	"net/http"
 	"os"
@@ -17,24 +14,15 @@ import (
 )
 
 func main() {
-	cfg, err := config.LoadConfig("../config.yaml")
-	if err != nil {
-		log.Fatalf("加载配置失败: %v", err)
-	}
-	logger.Init(cfg.Logger)
+	r := router.GetRouter()
 
-	// 初始化 user 服务 gRPC 客户端
-	userClient, err := client.NewUserClient(cfg.Services.User)
-	if err != nil {
-		log.Fatalf("连接 user 服务失败: %v", err)
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		v.RegisterValidation("phoneValidator", validate.PhoneValidator)
 	}
-
-	r := gin.New()
-	router.SetRouter(r, handler.NewHandler(userClient))
 
 	srv := &http.Server{
-		Addr:    ":8080",
-		Handler: r.Handler(),
+		Addr:    ":8899",
+		Handler: r,
 	}
 
 	go func() {
